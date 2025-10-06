@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickShopee - Ofertas Imperdíveis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFC837 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.8); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .logo-click {
+            color: #FF6B35;
+        }
+
+        .logo-shopee {
+            color: #FF1493;
+        }
+
+        h1 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FF1493;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(255,20,147,0.4);
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .link-card:active {
+            transform: translateY(-2px);
+        }
+
+        .link-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .link-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF1493;
+            margin-bottom: 8px;
+        }
+
+        .link-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #FF1493;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .admin-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .admin-panel h2 {
+            color: #FF1493;
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF1493;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .btn-add {
+            width: 100%;
+            background: linear-gradient(135deg, #FF1493, #FF6B35);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,20,147,0.3);
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,20,147,0.4);
+        }
+
+        .btn-add:active {
+            transform: translateY(0);
+        }
+
+        .btn-toggle {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-toggle:hover {
+            background: #FF1493;
+        }
+
+        .btn-delete {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-text">
+                    <div class="logo-click">CLICK</div>
+                    <div class="logo-shopee">SHOPEE</div>
+                </div>
+            </div>
+            <h1>🛍️ Ofertas Imperdíveis!</h1>
+            <p class="subtitle">Clique nos links abaixo e aproveite os melhores descontos</p>
+            <span class="badge">✨ Afiliado Oficial Shopee</span>
+        </div>
+
+        <button class="btn-toggle" onclick="toggleAdminPanel()">➕ Adicionar Novo Link</button>
+
+        <div id="adminPanel" class="admin-panel hidden">
+            <h2>✏️ Adicionar Novo Link</h2>
+            <form id="linkForm" onsubmit="addNewLink(event)">
+                <div class="form-group">
+                    <label>Ícone (emoji)</label>
+                    <input type="text" id="icon" placeholder="Ex: 📱, 👗, 🏠" maxlength="2" required>
+                </div>
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" id="title" placeholder="Ex: Eletrônicos" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="description" placeholder="Descreva o produto ou categoria" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Desconto</label>
+                    <input type="text" id="discount" placeholder="Ex: ATÉ 70% OFF" required>
+                </div>
+                <div class="form-group">
+                    <label>Link de Afiliado</label>
+                    <input type="url" id="link" placeholder="https://shopee.com.br/..." required>
+                </div>
+                <button type="submit" class="btn-add">✨ Adicionar Link</button>
+            </form>
+        </div>
+
+        <div class="links-container" id="linksContainer">
+            <a href="#" class="link-card" onclick="trackClick('eletrônicos')">
+                <button class="btn-delete" onclick="deleteCard(event)">🗑️</button>
+                <span class="discount-badge">ATÉ 70% OFF</span>
+                <div class="link-icon">📱</div>
+                <div class="link-title">Eletrônicos</div>
+                <div class="link-description">Smartphones, fones, smartwatches e muito mais com super descontos!</div>
+            </a>
+
+            <a href="#" class="link-card" onclick="trackClick('moda')">
+                <button class="btn-delete" onclick="deleteCard(event)">🗑️</button>
+                <span class="discount-badge">50% OFF</span>
+                <div class="link-icon">👗</div>
+                <div class="link-title">Moda & Estilo</div>
+                <div class="link-description">Roupas, calçados e acessórios incríveis para renovar seu guarda-roupa</div>
+            </a>
+
+            <a href="#" class="link-card" onclick="trackClick('casa')">
+                <button class="btn-delete" onclick="deleteCard(event)">🗑️</button>
+                <span class="discount-badge">40% OFF</span>
+                <div class="link-icon">🏠</div>
+                <div class="link-title">Casa & Decoração</div>
+                <div class="link-description">Transforme sua casa com produtos de decoração e utilidades domésticas</div>
+            </a>
+
+            <a href="#" class="link-card" onclick="trackClick('beleza')">
+                <button class="btn-delete" onclick="deleteCard(event)">🗑️</button>
+                <span class="discount-badge">60% OFF</span>
+                <div class="link-icon">💄</div>
+                <div class="link-title">Beleza & Saúde</div>
+                <div class="link-description">Cosméticos, skincare e produtos de cuidados pessoais</div>
+            </a>
+
+            <a href="#" class="link-card" onclick="trackClick('games')">
+                <button class="btn-delete" onclick="deleteCard(event)">🗑️</button>
+                <span class="discount-badge">45% OFF</span>
+                <div class="link-icon">🎮</div>
+                <div class="link-title">Games & Diversão</div>
+                <div class="link-description">Jogos, acessórios e produtos para sua diversão garantida</div>
+            </a>
+
+            <a href="#" class="link-card" onclick="trackClick('esportes')">
+                <button class="btn-delete" onclick="deleteCard(event)">🗑️</button>
+                <span class="discount-badge">55% OFF</span>
+                <div class="link-icon">⚽</div>
+                <div class="link-title">Esportes & Fitness</div>
+                <div class="link-description">Equipamentos e roupas para sua vida mais ativa e saudável</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>💰 Economize comprando pelos nossos links!</p>
+            <p style="margin-top: 10px;">Siga nas redes sociais:</p>
+            <div class="social-links">
+                <a href="#" class="social-icon" onclick="trackClick('instagram')">📷</a>
+                <a href="#" class="social-icon" onclick="trackClick('whatsapp')">💬</a>
+                <a href="#" class="social-icon" onclick="trackClick('telegram')">✈️</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 12px;">© 2024 ClickShopee - Todos os direitos reservados</p>
+        </div>
+    </div>
+
+    <script>
+        function trackClick(category) {
+            console.log('Link clicado: ' + category);
+            return true;
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        function addNewLink(event) {
+            event.preventDefault();
+            
+            const icon = document.getElementById('icon').value;
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const discount = document.getElementById('discount').value;
+            const link = document.getElementById('link').value;
+            
+            const container = document.getElementById('linksContainer');
+            const newCard = document.createElement('a');
+            newCard.href = link;
+            newCard.className = 'link-card';
+            newCard.target = '_blank';
+            newCard.onclick = function() { trackClick(title); };
+            
+            newCard.innerHTML = `
+                <button class="btn-delete" onclick="deleteCard(event)">🗑️</button>
+                <span class="discount-badge">${discount}</span>
+                <div class="link-icon">${icon}</div>
+                <div class="link-title">${title}</div>
+                <div class="link-description">${description}</div>
+            `;
+            
+            container.appendChild(newCard);
+            
+            newCard.style.animation = 'fadeIn 0.6s ease-in';
+            
+            document.getElementById('linkForm').reset();
+            toggleAdminPanel();
+            alert('✅ Link adicionado com sucesso!');
+        }
+
+        function deleteCard(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if (confirm('❌ Deseja realmente excluir este link?')) {
+                const card = event.target.closest('.link-card');
+                card.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    card.remove();
+                }, 300);
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            createSparkle(e.clientX, e.clientY);
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.style.transition = 'all 0.8s ease-out';
+                sparkle.style.transform = 'translateY(-100px)';
+                sparkle.style.opacity = '0';
+            }, 10);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 800);
+        }
+
+        const cards = document.querySelectorAll('.link-card');
+        cards.forEach((card, index) => {
+            card.style.animation = `fadeIn 0.6s ease-in ${index * 0.1}s both`;
+        });
+    </script>
+</body>
+</html>
